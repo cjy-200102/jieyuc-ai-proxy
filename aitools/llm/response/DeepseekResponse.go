@@ -6,18 +6,18 @@ import (
 )
 
 type DeepseekResponse struct {
-	Id      string               `json:"id"`
-	Object  string               `json:"object"`
-	Created int                  `json:"created"`
-	Model   string               `json:"model"`
-	Choices []DeepseekChoiceInfo `json:"choices"`
-	Usage   DeepseekUsage        `json:"usage"`
+	Id      string                `json:"id"`
+	Object  string                `json:"object"`
+	Created int                   `json:"created"`
+	Model   string                `json:"model"`
+	Choices []*DeepseekChoiceInfo `json:"choices"`
+	Usage   *DeepseekUsage        `json:"usage"`
 }
 
 type DeepseekChoiceInfo struct {
-	Index        int                            `json:"index"`
-	Message      vo.LargeLanguageModelMessageVo `json:"message"`
-	FinishReason string                         `json:"finish_reason"`
+	Index        int                             `json:"index"`
+	Message      *vo.LargeLanguageModelMessageVo `json:"message"`
+	FinishReason string                          `json:"finish_reason"`
 }
 
 type DeepseekUsage struct {
