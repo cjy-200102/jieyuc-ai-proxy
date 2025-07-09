@@ -1,10 +1,24 @@
 package main
 
-import "jieyuc-ai-proxy/aitools/llm/impl"
+import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
+	"jieyuc-ai-proxy/routes"
+	"log"
+)
 
 // main program entrance
 func main() {
-	r, _ := impl.GetInstance().Exec(`请告诉我1+1等于多少`)
-	println(r.String())
-	//println(request.CreateDeepseekRequestParams("12312", "2131"))
+	r := gin.Default()
+	viper.SetConfigFile("./bootstrap.yaml")
+	if err := viper.ReadInConfig(); err != nil {
+		panic(err)
+	}
+	port := viper.GetInt("server.port")
+	routes.InitHttpRoutes(r)
+	if err := r.Run(fmt.Sprintf(":%d", port)); err != nil {
+		log.Println("启动失败……")
+		panic(err)
+	}
 }
