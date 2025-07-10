@@ -12,6 +12,7 @@ func DeepseekExec(ctx *gin.Context) {
 	req := &request.LLMProxyRequest{}
 	if err := ctx.ShouldBindJSON(req); err != nil {
 		ctx.JSON(http.StatusOK, response.BuildFailed("invalid params"))
+		return
 	}
 
 	llmInstance := llm.GetInstance()
